@@ -8,6 +8,7 @@
 import Foundation
 
 class Sorting {
+    
   func bubbleSort(_ inputArray: [Int]) -> [Int] {
     var inputArray = inputArray
     for _ in 1...inputArray.count {
