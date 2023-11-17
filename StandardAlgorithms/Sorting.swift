@@ -77,4 +77,22 @@ class Sorting {
 		
 		return quickSort(leftArray) + middleItem + quickSort(rightArray)
 	}
+	
+	func insertionSort(_ inputArray: [Int]) -> [Int] {
+		var sortedArray = [inputArray[0]]
+		
+		for i in 1..<inputArray.count {
+			for j in sortedArray.count-1...0 {
+				if inputArray[i] == sortedArray[j] || inputArray[i] > sortedArray[j] {
+					sortedArray.insert(inputArray[i], at: j+1)
+					break
+				}
+				else if j == 0 {
+					sortedArray.insert(inputArray[i], at: 0)
+				}
+			}
+		}
+		
+		return sortedArray
+	}
 }
