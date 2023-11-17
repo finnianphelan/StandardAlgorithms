@@ -68,4 +68,13 @@ class Sorting {
 		
 		return sortedArray
 	}
+	
+	func quickSort(_ inputArray: [Int]) -> [Int] {
+		let middleIndex = inputArray[inputArray.count / 2]
+		let leftArray = inputArray.filter { $0 < middleIndex }
+		let middleItem = inputArray.filter { $0 == middleIndex }
+		let rightArray = inputArray.filter { $0 > middleIndex }
+		
+		return quickSort(leftArray) + middleItem + quickSort(rightArray)
+	}
 }
