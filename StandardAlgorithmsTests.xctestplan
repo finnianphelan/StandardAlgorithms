@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "ACE5A0C0-107A-4524-B1B5-8523B2D1F5C2",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:StandardAlgorithms.xcodeproj",
+        "identifier" : "7619F5D02B10F4EC00F6D6FA",
+        "name" : "StandardAlgorithmsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

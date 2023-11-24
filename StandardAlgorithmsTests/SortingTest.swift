@@ -9,6 +9,8 @@ import XCTest
 
 final class SortingTest: XCTestCase {
 	
+	let sorting = Sorting()
+	
 	let testArrays = [
 		(data: [5, 4, 3, 2, 1], sortedData: [1, 2, 3, 4, 5], itemToFind: 5, expectedItemIndex: 0),
 		(data: [10, 15, 8, 20, 3], sortedData: [3, 8, 10, 15, 20], itemToFind: 15, expectedItemIndex: 1),
@@ -25,60 +27,48 @@ final class SortingTest: XCTestCase {
 	func testBubbleSort() {
 		print("Testing bubble sort...")
 		for testCase in testArrays {
-			print("Testing with following array: \(testCase[data])")
-			let actual = bubbleSort(testCase[data])
-			XCTAssertEqual(actual, testCase[sortedData])
+			let actual = sorting.bubbleSort(testCase.data)
+			XCTAssertEqual(actual, testCase.sortedData)
 		}
-		print("Finished testing bubble sort.")
 	}
 	
 	func testMergeSort() {
 		print("Testing merge sort...")
 		for testCase in testArrays {
-			print("Testing with following array: \(testCase[data])")
-			let actual = mergeSort(testCase[data])
-			XCTAssertEqual(actual, testCase[sortedData])
+			let actual = sorting.mergeSort(testCase.data)
+			XCTAssertEqual(actual, testCase.sortedData)
 		}
-		print("Finished testing merge sort.")
 	}
 	
 	func testQuickSort() {
 		print("Testing QuickSort...")
 		for testCase in testArrays {
-			print("Testing with following array: \(testCase[data])")
-			let actual = quickSort(testCase[data])
-			XCTAssertEqual(actual, testCase[sortedData])
+			let actual = sorting.quickSort(testCase.data)
+			XCTAssertEqual(actual, testCase.sortedData)
 		}
-		print("Finished inserting QuickSort.")
 	}
 	
 	func testInsertionSort() {
 		print("Testing insertion sort...")
 		for testCase in testArrays {
-			print("Testing with following array: \(testCase[data])")
-			let actual = insertionSort(testCase[data])
-			XCTAssertEqual(actual, testCase[sortedData])
+			let actual = sorting.insertionSort(testCase.data)
+			XCTAssertEqual(actual, testCase.sortedData)
 		}
-		print("Finished testing insertion sort.")
 	}
 	
 	func testLinearSearch() {
 		print("Testing linear search...")
 		for testCase in testArrays {
-			print("Testing with following array and item: \(testCase[data]), \(testCase[itemToFind])")
-			let actual = linearSearch(testCase[data], testCase[itemToFind])
-			XCTAssertEqual(actual, testCase[expectedItemIndex])
+			let actual = sorting.linearSearch(testCase.data, testCase.itemToFind)
+			XCTAssertEqual(actual, testCase.expectedItemIndex)
 		}
-		print("Finished testing linear search.")
 	}
 	
 	func testBinarySearch() {
 		print("Testing binary search...")
 		for testCase in testArrays {
-			print("Testing with following array and item: \(testCase[data]), \(testCase[itemToFind])")
-			let actual = linearSearch(testCase[data], testCase[itemToFind])
-			XCTAssertEqual(actual, testCase[expectedItemIndex])
+			let actual = sorting.binarySearch(testCase.data, testCase.itemToFind)
+			XCTAssertEqual(actual, testCase.expectedItemIndex)
 		}
-		print("Finished testing binary search.")
 	}
 }

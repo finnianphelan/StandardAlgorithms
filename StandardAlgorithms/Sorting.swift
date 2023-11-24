@@ -28,9 +28,16 @@ class Sorting {
 	func mergeSort(_ inputArray: [Int]) -> [Int] {
 		var sortedArray = inputArray
 		
-		let array1 = mergeSort(Array((inputArray[0..<inputArray.count/2])))
-		let array2 = mergeSort(Array(inputArray[inputArray.count/2..<inputArray.count]))
-		sortedArray = merge(array1, array2)
+		if inputArray.count <= 1 {
+			return inputArray
+		}
+		
+		else {
+			
+			let array1 = mergeSort(Array(inputArray[0..<inputArray.count/2]))
+			let array2 = mergeSort(Array(inputArray[inputArray.count/2..<inputArray.count]))
+			sortedArray = merge(array1, array2)
+		}
 		
 		func merge(_ array1: [Int], _ array2: [Int]) -> [Int] {
 			var mergedArray: [Int] = []
@@ -70,19 +77,36 @@ class Sorting {
 	}
 	
 	func quickSort(_ inputArray: [Int]) -> [Int] {
-		let middleIndex = inputArray[inputArray.count / 2]
-		let leftArray = inputArray.filter { $0 < middleIndex }
-		let middleItem = inputArray.filter { $0 == middleIndex }
-		let rightArray = inputArray.filter { $0 > middleIndex }
+		if inputArray.count <= 1 {
+			return inputArray
+		}
 		
-		return quickSort(leftArray) + middleItem + quickSort(rightArray)
+		else {
+			let middleIndex = inputArray.count / 2
+			let middleItem = inputArray[middleIndex]
+			
+			var leftArray: [Int] = []
+			var rightArray: [Int] = []
+			
+			for (index, item) in inputArray.enumerated() {
+				if index != middleIndex {
+					if item < middleItem {
+						leftArray.append(item)
+					} else {
+						rightArray.append(item)
+					}
+				}
+			}
+			
+			return quickSort(leftArray) + [middleItem] + quickSort(rightArray)
+		}
 	}
 	
 	func insertionSort(_ inputArray: [Int]) -> [Int] {
 		var sortedArray = [inputArray[0]]
 		
 		for i in 1..<inputArray.count {
-			for j in sortedArray.count-1...0 {
+			for j in stride(from: sortedArray.count-1, through: 0, by: -1) {
 				if inputArray[i] == sortedArray[j] || inputArray[i] > sortedArray[j] {
 					sortedArray.insert(inputArray[i], at: j+1)
 					break
@@ -94,5 +118,43 @@ class Sorting {
 		}
 		
 		return sortedArray
+	}
+	
+	func linearSearch(_ inputArray: [Int], _ itemToFind: Int) -> Int {
+		for i in 0..<inputArray.count {
+			if inputArray[i] == itemToFind {
+				return i
+			}
+		}
+		return -1
+	}
+	
+	func binarySearch(_ inputArray: [Int], _ itemToFind: Int) -> Int {
+		var searchingArray = inputArray
+		var currentlySearching = true
+		var middleIndex: Int
+		
+		while currentlySearching {
+			if searchingArray.count > 1 {
+				middleIndex = searchingArray.count / 2
+				
+				if searchingArray[middleIndex] == itemToFind {
+					return middleIndex
+				}
+				
+				else if searchingArray[middleIndex] < itemToFind {
+					searchingArray = Array(searchingArray.suffix(from: middleIndex+1))
+				}
+				
+				else {
+					searchingArray = Array(searchingArray.prefix(middleIndex))
+				}
+				
+			} else {
+				currentlySearching = false
+			}
+		}
+		
+		return -1
 	}
 }
