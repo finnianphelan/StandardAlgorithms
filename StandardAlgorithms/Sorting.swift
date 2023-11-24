@@ -135,6 +135,7 @@ class Sorting {
 		var middleIndex: Int
 		
 		while currentlySearching {
+			print(searchingArray)
 			if searchingArray.count > 1 {
 				middleIndex = searchingArray.count / 2
 				
@@ -143,7 +144,7 @@ class Sorting {
 				}
 				
 				else if searchingArray[middleIndex] < itemToFind {
-					searchingArray = Array(searchingArray.suffix(from: middleIndex+1))
+					searchingArray = Array(searchingArray.suffix(from: middleIndex + 1))
 				}
 				
 				else {
