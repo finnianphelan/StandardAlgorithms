@@ -7,6 +7,26 @@
 
 import XCTest
 
+func createRandomList(_ length: Int) -> [Int] {
+	var randomList = Array(repeating: 0, count: length)
+	
+	for i in 0..<length {
+		randomList[i] = Int.random(in: 1...100)
+	}
+	
+	return randomList
+}
+
+func createSortedList(_ length: Int) -> [Int] {
+	var sortedList = Array(repeating: 0, count: length)
+	
+	for i in 0..<length {
+		sortedList[i] = i
+	}
+	
+	return sortedList
+}
+
 final class SortingTest: XCTestCase {
 	
 	let sorting = Sorting()
@@ -24,7 +44,7 @@ final class SortingTest: XCTestCase {
 		(data: [9, 7, 8, 4, 10], sortedData: [4, 7, 8, 9, 10], itemToFind: 10, expectedItemIndex: 4, expectedSortedItemIndex: 4)
 	]
 	
-	func testBubbleSort() {
+	func testBubbleSortSuccess() {
 		print("Testing bubble sort...")
 		for testCase in testArrays {
 			let actual = sorting.bubbleSort(testCase.data)
@@ -32,7 +52,25 @@ final class SortingTest: XCTestCase {
 		}
 	}
 	
-	func testMergeSort() {
+	func testBubbleSortPerformanceWithListLength5() {
+		self.measure {
+			sorting.bubbleSort(createRandomList(5))
+		}
+	}
+	
+	func testBubbleSortPerformanceWithListLength50() {
+		self.measure {
+			sorting.bubbleSort(createRandomList(50))
+		}
+	}
+	
+	func testBubbleSortPerformanceWithListLength500() {
+		self.measure {
+			sorting.bubbleSort(createRandomList(500))
+		}
+	}
+	
+	func testMergeSortSuccess() {
 		print("Testing merge sort...")
 		for testCase in testArrays {
 			let actual = sorting.mergeSort(testCase.data)
@@ -40,7 +78,25 @@ final class SortingTest: XCTestCase {
 		}
 	}
 	
-	func testQuickSort() {
+	func testMergeSortPerformanceWithListLength5() {
+		self.measure {
+			sorting.mergeSort(createRandomList(5))
+		}
+	}
+	
+	func testMergeSortPerformanceWithListLength50() {
+		self.measure {
+			sorting.mergeSort(createRandomList(50))
+		}
+	}
+	
+	func testMergeSortPerformanceWithListLength500() {
+		self.measure {
+			sorting.mergeSort(createRandomList(500))
+		}
+	}
+	
+	func testQuickSortSuccess() {
 		print("Testing QuickSort...")
 		for testCase in testArrays {
 			let actual = sorting.quickSort(testCase.data)
@@ -48,7 +104,25 @@ final class SortingTest: XCTestCase {
 		}
 	}
 	
-	func testInsertionSort() {
+	func testQuickSortPerformanceWithListLength5() {
+		self.measure {
+			sorting.quickSort(createRandomList(5))
+		}
+	}
+	
+	func testQuickSortPerformanceWithListLength50() {
+		self.measure {
+			sorting.quickSort(createRandomList(50))
+		}
+	}
+	
+	func testQuickSortPerformanceWithListLength500() {
+		self.measure {
+			sorting.quickSort(createRandomList(500))
+		}
+	}
+	
+	func testInsertionSortSuccess() {
 		print("Testing insertion sort...")
 		for testCase in testArrays {
 			let actual = sorting.insertionSort(testCase.data)
@@ -56,7 +130,25 @@ final class SortingTest: XCTestCase {
 		}
 	}
 	
-	func testLinearSearch() {
+	func testInsertionSortPerformanceWithListLength5() {
+		self.measure {
+			sorting.insertionSort(createRandomList(5))
+		}
+	}
+	
+	func testInsertionSortPerformanceWithListLength50() {
+		self.measure {
+			sorting.insertionSort(createRandomList(50))
+		}
+	}
+	
+	func testInsertionSortPerformanceWithListLength500() {
+		self.measure {
+			sorting.insertionSort(createRandomList(500))
+		}
+	}
+	
+	func testLinearSearchSuccess() {
 		print("Testing linear search...")
 		for testCase in testArrays {
 			let actual = sorting.linearSearch(testCase.data, testCase.itemToFind)
@@ -64,9 +156,51 @@ final class SortingTest: XCTestCase {
 		}
 	}
 	
-	func testBinarySearch() {
+	func testLinearSearchPerformanceWithListLength5() {
+		self.measure {
+			let randomList = createRandomList(5)
+			sorting.linearSearch(randomList, randomList[randomList.count-1])
+		}
+	}
+	
+	func testLinearSearchPerformanceWithListLength50() {
+		self.measure {
+			let randomList = createRandomList(50)
+			sorting.linearSearch(randomList, randomList[randomList.count-1])
+		}
+	}
+	
+	func testLinearSearchPerformanceWithListLength500() {
+		self.measure {
+			let randomList = createRandomList(500)
+			sorting.linearSearch(randomList, randomList[randomList.count-1])
+		}
+	}
+	
+	func testBinarySearchSuccess() {
 		print("Testing binary search...")
 		
 		XCTAssertEqual(sorting.binarySearch([1,2,3,4,5], 5), 4)
+	}
+	
+	func testBinarySearchPerformanceWithListLength5() {
+		self.measure {
+			let sortedList = createSortedList(5)
+			sorting.binarySearch(sortedList, sortedList[sortedList.count-1])
+		}
+	}
+	
+	func testBinarySearchPerformanceWithListLength50() {
+		self.measure {
+			let sortedList = createSortedList(50)
+			sorting.binarySearch(sortedList, sortedList[sortedList.count-1])
+		}
+	}
+	
+	func testBinarySearchPerformanceWithListLength500() {
+		self.measure {
+			let sortedList = createSortedList(500)
+			sorting.binarySearch(sortedList, sortedList[sortedList.count-1])
+		}
 	}
 }
